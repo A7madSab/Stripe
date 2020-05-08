@@ -1,6 +1,6 @@
 const cors = require("cors")
 const express = require("express")
-const stripe = require("stripe")("STRIPE_SECRET_KEY")
+const stripe = require("stripe")("APP_SECRET")
 const uuid = require("uuid/v4")
 
 const app = express()
@@ -9,12 +9,11 @@ app.use(express.json())
 app.use(cors())
 
 app.get("/", (req, res) => {
-    res.send("Add your Stripe Secret Key to the .require('stripe') statement!")
+    res.send("I am Alive")
 })
 
 app.post("/checkout", async (req, res) => {
     console.log("Request:", req.body)
-
     let error
     let status
     try {

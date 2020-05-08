@@ -9,18 +9,20 @@ import "./styles.css"
 
 toast.configure()
 
-function App() {
+const App = () => {
   const [product] = useState({
     name: "Tesla Roadster",
     price: 64998.67,
     description: "Cool car"
   })
 
-  async function handleToken(token, addresses) {
+  const handleToken = async (token, addresses) => {
     const response = await axios.post(
-      "https://ry7v05l6on.sse.codesandbox.io/checkout",
-      { token, product }
-    )
+      "http://localhost:8080/checkout", {
+      token,
+      product
+    })
+
     const { status } = response.data
     console.log("Response:", response.data)
     if (status === "success") {
@@ -37,7 +39,7 @@ function App() {
         <h3>On Sale · ${product.price}</h3>
       </div>
       <StripeCheckout
-        stripeKey="pk_test_4TbuO6qAW2XPuce1Q6ywrGP200NrDZ2233"
+        stripeKey="PUBLISHABLE_KEY"
         token={handleToken}
         amount={product.price * 100}
         name="Tesla Roadster"
